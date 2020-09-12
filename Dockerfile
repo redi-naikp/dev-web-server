@@ -1,4 +1,4 @@
-FROM node:12.7.0-alpine
+FROM docker-registry.rdti.com/com.redi.web/node:10.4.1
 
 WORKDIR '/server-web'
 
