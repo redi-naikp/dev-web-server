@@ -1,0 +1,19 @@
+node {
+      stage ('Initialization') {
+        cleanWs()
+      }
+
+      stage('Git Clone') {
+          ansiColor('xterm') {
+            checkout scm
+          }
+      }
+      
+      stage ('Package') {
+            sh """
+                helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
+		helm repo update
+                helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
+            """
+      }
+}
