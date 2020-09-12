@@ -1,10 +1,10 @@
 {
   "name": "server-web",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+       "docker-build-and-push": "docker build --tag docker-registry.rdti.com/com.redi.web/server-web:${IMAGE_VERSION:-latest} . && docker push docker-registry.rdti.com/com.redi.web/hellofriends:${IMAGE_VERSION:-latest}"
   },
   "author": "",
   "license": "ISC",

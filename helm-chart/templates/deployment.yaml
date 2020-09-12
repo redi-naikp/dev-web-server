@@ -31,8 +31,12 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "docker-registry.rdti.com/com.redi.web/server-web:{{ required "Image tag is required" .Values.image.tag }}"
+	  {{- if eq .Values.image.tag "latest" }}
+          imagePullPolicy: Always
+	  {{- else }}
+          imagePullPolicy: IfNotPresent
+          {{- end }}
           ports:
             - name: http
               containerPort: 8000
