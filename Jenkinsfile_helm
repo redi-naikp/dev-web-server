@@ -12,10 +12,21 @@ pipeline {
         }
       }  
     }
-      
+
+    stage('fetch-helm') {
+      steps {      
+        sh '''
+         wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
+         tar xvzf helm-v3.0.2-linux-amd64.tar.gz
+         #chmod a+x helm
+        '''
+       }
+       
     stage ('Package') {
       steps {
         sh '''
+	 wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
+         tar xvzf helm-v3.0.2-linux-amd64.tar.gz
 	 helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
          helm repo update
          helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
