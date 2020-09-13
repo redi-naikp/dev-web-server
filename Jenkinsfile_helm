@@ -20,9 +20,6 @@ pipeline {
       steps {
         sh '''
 	  ${WORKSPACE}/build.sh --pack_helm --push_helm --helm_repo ${HELM_REPO} --helm_usr ${HELM_USR} --helm_psw ${HELM_PSW}
-          #helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
- 	  #helm repo update
-          #helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
         '''       
       }
     }
