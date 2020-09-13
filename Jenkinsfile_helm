@@ -1,7 +1,6 @@
 pipeline {
-  agent any
-    options {
-        timeout(time: 1, unit: 'HOURS') 
+  agent {
+    node { label 'master' }
     }
     
   stages {
@@ -16,8 +15,6 @@ pipeline {
     stage ('Package') {
       steps {
         sh '''
-	 wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
-         tar xvzf helm-v3.0.2-linux-amd64.tar.gz
 	 helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
          helm repo update
          helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
