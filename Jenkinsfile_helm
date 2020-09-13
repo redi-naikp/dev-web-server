@@ -1,19 +1,31 @@
-node {
-      stage ('Initialization') {
-        cleanWs()
-      }
+pipeline {
+  agent {
+    docker {
+      label 'static'
+      image 'docker-registry.rdti.com/com.redi/builder:0.9'
+      args '-v /var/run/docker.sock:/var/run/docker.sock --group-add 992'
+    }
+  }
 
-      stage('Git Clone') {
-          ansiColor('xterm') {
-            checkout scm
-          }
-      }
+  stages {
+    stage('Git Clone') {
+      steps {
+        ansiColor('xterm') {
+          checkout scm
+        }
+      }  
+    }
       
-      stage ('Package') {
-            sh """
-                helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
-		helm repo update
-                helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
-            """
+    stage ('Package') {
+      steps {
+        ansiColor('xterm') {
+          sh '''
+            helm repo add artifactory https://artifactory.rdti.com/artifactory/helm-local
+ 	    helm repo update
+            helm push-artifactory helm-chart https://artifactory.rdti.com/artifactory/helm-local
+          '''
+        }
       }
+    }
+  }  
 }
