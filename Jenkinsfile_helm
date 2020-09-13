@@ -1,11 +1,4 @@
 pipeline {
-  agent {
-    docker {
-      label 'static'
-      image 'docker-registry.rdti.com/com.redi/builder:0.9'
-      args '-v /var/run/docker.sock:/var/run/docker.sock --group-add 992'
-    }
-  }
 
   stages {
     stage('Git Clone') {
