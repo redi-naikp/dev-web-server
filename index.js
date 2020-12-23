@@ -7,7 +7,7 @@ const port = process.env.PORT || 8000;
 app.use(morgan("combined"));
 
 app.get("/", (req, res) => {
-  res.send("Hello Team, All the best");
+  res.send("End of 2020");
 });
 
 app.listen(port, () => console.log(`Hello Core Processing Team ${port}!`));
